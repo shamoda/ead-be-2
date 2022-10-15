@@ -27,4 +27,9 @@ public class UserController {
     public ResponseEntity<?> login(@RequestParam("nic") String nic, @RequestParam("password") String password) {
         return new ResponseEntity<>(service.login(nic, password), HttpStatus.OK);
     }
+
+    @GetMapping("/")
+    public ResponseEntity<?> getAllUsers() {
+        return new ResponseEntity<>(service.getAllusers(), HttpStatus.OK);
+    }
 }
