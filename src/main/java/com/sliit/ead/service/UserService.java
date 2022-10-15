@@ -4,10 +4,13 @@ import com.sliit.ead.model.User;
 import com.sliit.ead.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+/**
+ * @author S.M. Jayasekara
+ * @IT_number IT19161648
+ */
 @Service
 public class UserService {
     private final UserRepository userRepository;

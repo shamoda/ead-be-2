@@ -4,6 +4,8 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
+
 /**
  * @author S.M. Jayasekara
  * @IT_number IT19161648
@@ -14,12 +16,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @ToString
 @Document
-public class User {
+public class Shed {
     @Id
-    private String nic;
+    private String regNo;
     private String name;
     private String address;
-    private String vehicleNo;
-    private String fuelType;
-    private String password;
+    private LocalDateTime petrolArrivalTime;
+    private LocalDateTime petrolFinishTime;
+    private int petrolQueueLength;
+    private LocalDateTime dieselArrivalTime;
+    private LocalDateTime dieselFinishTime;
+    private int dieselQueueLength;
 }

@@ -7,6 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * @author S.M. Jayasekara
+ * @IT_number IT19161648
+ */
 @RestController
 @RequestMapping("/api/v1/users")
 @CrossOrigin(origins = "*")
