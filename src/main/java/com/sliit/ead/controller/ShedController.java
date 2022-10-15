@@ -36,4 +36,9 @@ public class ShedController {
     public ResponseEntity<?> getShortestQueueByAddressAndType(@PathVariable String address, @PathVariable String type) {
         return new ResponseEntity<>(service.getShortestQueueByAddressAndType(address, type), HttpStatus.OK);
     }
+
+    @GetMapping("/get/{regNo}")
+    public ResponseEntity<?> getShedById(@PathVariable String regNo) {
+        return new ResponseEntity<>(service.getShedById(regNo), HttpStatus.OK);
+    }
 }

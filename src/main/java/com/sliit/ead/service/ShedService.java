@@ -3,6 +3,9 @@ package com.sliit.ead.service;
 import com.sliit.ead.model.Shed;
 import com.sliit.ead.repository.ShedRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,10 +17,12 @@ import java.util.List;
 @Service
 public class ShedService {
     private final ShedRepository repository;
+    private final MongoTemplate mongoTemplate;
 
     @Autowired
-    public ShedService(ShedRepository repository) {
+    public ShedService(ShedRepository repository, MongoTemplate mongoTemplate) {
         this.repository = repository;
+        this.mongoTemplate = mongoTemplate;
     }
 
     public Shed insertShed(Shed shed) {
@@ -40,6 +45,38 @@ public class ShedService {
             }
         }
         return tmpShed;
+    }
+
+    public Shed getShedById(String regNo) {
+        return repository.findById(regNo).get();
+    }
+
+    public Shed queueOperation(String regNo, String fuelType, String operation) {
+        Shed shed = mongoTemplate.findOne(Query.query(Criteria.where("_id").is(regNo)), Shed.class);
+        if (fuelType.equalsIgnoreCase("petrol")) {
+            int tempLen;
+            if (operation.equalsIgnoreCase("increment")) {
+                assert shed != null;
+                tempLen = shed.getPetrolQueueLength() + 1;
+            } else {
+                assert shed != null;
+                tempLen = shed.getPetrolQueueLength() - 1;
+            }
+            shed.setPetrolQueueLength(tempLen);
+            mongoTemplate.save(shed);
+        } else {
+            int tempLen;
+            if (operation.equalsIgnoreCase("increment")) {
+                assert shed != null;
+                tempLen = shed.getDieselQueueLength() + 1;
+            } else {
+                assert shed != null;
+                tempLen = shed.getDieselQueueLength() - 1;
+            }
+            shed.setPetrolQueueLength(tempLen);
+            mongoTemplate.save(shed);
+        }
+        return shed;
     }
 
 }
