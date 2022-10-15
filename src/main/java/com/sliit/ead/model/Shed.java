@@ -27,4 +27,5 @@ public class Shed {
     private LocalDateTime dieselArrivalTime;
     private LocalDateTime dieselFinishTime;
     private int dieselQueueLength;
+    private String password;
 }
