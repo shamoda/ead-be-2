@@ -22,9 +22,14 @@ public class QueueController {
         this.service = service;
     }
 
-    @PostMapping("/")
+    @PostMapping("/insert")
     public ResponseEntity<?> insertQueue(@RequestBody Queue queue) {
         queue.setId(String.valueOf(UUID.randomUUID()));
         return new ResponseEntity<>(service.insertQueue(queue), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/exit/{id}")
+    public ResponseEntity<?> existQueue(@PathVariable String id) {
+        return new ResponseEntity<>(service.exitQueue(id), HttpStatus.OK);
     }
 }

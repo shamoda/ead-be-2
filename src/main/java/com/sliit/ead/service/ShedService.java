@@ -33,6 +33,17 @@ public class ShedService {
         return repository.findShedsByAddress(address);
     }
 
+    public Shed login(String regNo, String password) {
+        Shed shed = repository.findById(regNo).get();
+        if (shed != null) {
+            if (shed.getPassword().equalsIgnoreCase(password)) {
+                return shed;
+            }
+            return null;
+        }
+        return null;
+    }
+
     public Shed getShortestQueueByAddressAndType(String address, String type) {
         List<Shed> sheds = getShedByAddress(address);
         Shed tmpShed = sheds.get(0);

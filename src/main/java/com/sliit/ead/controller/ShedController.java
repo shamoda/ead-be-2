@@ -27,6 +27,11 @@ public class ShedController {
         return new ResponseEntity<>(service.insertShed(shed), HttpStatus.CREATED);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestParam("regNo") String regNo, @RequestParam("password") String password) {
+        return new ResponseEntity<>(service.login(regNo, password), HttpStatus.OK);
+    }
+
     @GetMapping("/{address}")
     public ResponseEntity<?> getShedsByAddress(@PathVariable String address) {
         return new ResponseEntity<>(service.getShedByAddress(address), HttpStatus.OK);
