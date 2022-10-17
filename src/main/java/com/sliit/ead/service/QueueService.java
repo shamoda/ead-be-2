@@ -9,6 +9,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 /**
  * @author S.M. Jayasekara
@@ -38,5 +40,21 @@ public class QueueService {
         mongoTemplate.save(queue);
         shedService.queueOperation(queue.getRegNo(), queue.getFuelType(), "decrement");
         return queue;
+    }
+
+    public long getAverageWaitingTimeByRegNoAndFuelType(String regNo, String type) {
+        List<Queue> queues = repository.findQueuesByRegNoAndFuelType(regNo, type);
+        long count = 0;
+        long totWait = 0;
+        for (Queue queue : queues) {
+            if (queue.getArrivedTime().isAfter(LocalDateTime.now().minusHours(1)) && queue.getDepartTime() != null && !queue.getLeftEarly()) {
+                long wait = ChronoUnit.MINUTES.between(queue.getArrivedTime(), queue.getDepartTime());
+                totWait = totWait + wait;
+                count++;
+            }
+        }
+        if (count != 0)
+            return totWait/count;
+        return 0;
     }
 }

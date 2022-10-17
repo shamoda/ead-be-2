@@ -32,4 +32,9 @@ public class QueueController {
     public ResponseEntity<?> existQueue(@PathVariable String id) {
         return new ResponseEntity<>(service.exitQueue(id), HttpStatus.OK);
     }
+
+    @GetMapping("/waiting-time/{regNo}/{type}")
+    public ResponseEntity<?> getAverageWaitingTimeByRegNoAndFuelType(@PathVariable String regNo, @PathVariable String type) {
+        return new ResponseEntity<>(service.getAverageWaitingTimeByRegNoAndFuelType(regNo, type), HttpStatus.OK);
+    }
 }
