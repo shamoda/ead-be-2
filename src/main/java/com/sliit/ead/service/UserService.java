@@ -20,9 +20,8 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public String insertUser(User user) {
-        userRepository.save(user);
-        return "Registration of user is successful!!";
+    public User insertUser(User user) {
+        return userRepository.save(user);
     }
 
     public User login(String nic, String password ) {
