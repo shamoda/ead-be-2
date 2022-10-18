@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -56,6 +57,42 @@ public class ShedService {
             }
         }
         return tmpShed;
+    }
+
+    public Shed updatePetrolArrived(String regNo) {
+        Shed shed = mongoTemplate.findOne(Query.query(Criteria.where("_id").is(regNo)), Shed.class);
+        shed.setPetrolArrivalTime(LocalDateTime.now());
+        shed.setPetrolAvailable(true);
+        shed.setPetrolFinishTime(null);
+        mongoTemplate.save(shed);
+        return shed;
+    }
+
+    public Shed updatePetrolFinished(String regNo) {
+        Shed shed = mongoTemplate.findOne(Query.query(Criteria.where("_id").is(regNo)), Shed.class);
+        shed.setPetrolArrivalTime(null);
+        shed.setPetrolAvailable(false);
+        shed.setPetrolFinishTime(LocalDateTime.now());
+        mongoTemplate.save(shed);
+        return shed;
+    }
+
+    public Shed updateDieselArrived(String regNo) {
+        Shed shed = mongoTemplate.findOne(Query.query(Criteria.where("_id").is(regNo)), Shed.class);
+        shed.setDieselArrivalTime(LocalDateTime.now());
+        shed.setDieselAvailable(true);
+        shed.setDieselFinishTime(null);
+        mongoTemplate.save(shed);
+        return shed;
+    }
+
+    public Shed updateDieselFinished(String regNo) {
+        Shed shed = mongoTemplate.findOne(Query.query(Criteria.where("_id").is(regNo)), Shed.class);
+        shed.setDieselArrivalTime(null);
+        shed.setDieselAvailable(false);
+        shed.setDieselFinishTime(LocalDateTime.now());
+        mongoTemplate.save(shed);
+        return shed;
     }
 
     public Shed getShedById(String regNo) {

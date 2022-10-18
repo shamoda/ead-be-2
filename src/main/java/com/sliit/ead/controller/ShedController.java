@@ -46,4 +46,24 @@ public class ShedController {
     public ResponseEntity<?> getShedById(@PathVariable String regNo) {
         return new ResponseEntity<>(service.getShedById(regNo), HttpStatus.OK);
     }
+
+    @GetMapping("/petrol-arrived/{regNo}")
+    public ResponseEntity<?> updatePetrolArrived(@PathVariable String regNo) {
+        return new ResponseEntity<>(service.updatePetrolArrived(regNo), HttpStatus.OK);
+    }
+
+    @GetMapping("/petrol-finished/{regNo}")
+    public ResponseEntity<?> updatePetrolFinished(@PathVariable String regNo) {
+        return new ResponseEntity<>(service.updatePetrolFinished(regNo), HttpStatus.OK);
+    }
+
+    @GetMapping("/diesel-arrived/{regNo}")
+    public ResponseEntity<?> updateDieselArrived(@PathVariable String regNo) {
+        return new ResponseEntity<>(service.updateDieselArrived(regNo), HttpStatus.OK);
+    }
+
+    @GetMapping("/diesel-finished/{regNo}")
+    public ResponseEntity<?> updateDieselFinished(@PathVariable String regNo) {
+        return new ResponseEntity<>(service.updateDieselFinished(regNo), HttpStatus.OK);
+    }
 }
