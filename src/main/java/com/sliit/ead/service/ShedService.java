@@ -48,14 +48,24 @@ public class ShedService {
     public Shed getShortestQueueByAddressAndType(String address, String type) {
         List<Shed> sheds = getShedByAddress(address);
         Shed tmpShed = sheds.get(0);
+        int i = 0;
         for (Shed shed : sheds) {
-            if (type.equalsIgnoreCase("petrol") && shed.getPetrolQueueLength() < tmpShed.getPetrolQueueLength()) {
+            if (type.equalsIgnoreCase("petrol") && shed.getPetrolQueueLength() <= tmpShed.getPetrolQueueLength()) {
+                if (!shed.getPetrolAvailable())
+                    continue;
                 tmpShed = shed;
+                i++;
             }
-            else if (type.equalsIgnoreCase("diesel") && shed.getDieselQueueLength() < tmpShed.getDieselQueueLength()) {
+            else if (type.equalsIgnoreCase("diesel") && shed.getDieselQueueLength() <= tmpShed.getDieselQueueLength()) {
+                if (!shed.getDieselAvailable())
+                    continue;
                 tmpShed = shed;
+                i++;
             }
         }
+
+        if (i == 0)
+            return null;
         return tmpShed;
     }
 
