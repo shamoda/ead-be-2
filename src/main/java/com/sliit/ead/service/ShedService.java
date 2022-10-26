@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * @author S.M. Jayasekara
- * @IT_number IT19161648
+ * @author Wikramasinghe R.J.P
+ * @IT_number IT19151052
  */
 @Service
 public class ShedService {
@@ -26,14 +26,17 @@ public class ShedService {
         this.mongoTemplate = mongoTemplate;
     }
 
-    public Shed insertShed(Shed shed) {
+    // Shed create method
+    public Shed createShed(Shed shed) {
         return repository.save(shed);
     }
 
-    public List<Shed> getShedByAddress(String address) {
+    // Sheds by given address
+    public List<Shed> getByAddress(String address) {
         return repository.findShedsByAddress(address);
     }
 
+    // Shed login
     public Shed login(String regNo, String password) {
         Shed shed = repository.findById(regNo).get();
         if (shed != null) {
@@ -45,8 +48,9 @@ public class ShedService {
         return null;
     }
 
-    public Shed getShortestQueueByAddressAndType(String address, String type) {
-        List<Shed> sheds = getShedByAddress(address);
+    // Shortest queue for the given Fuel type and Address
+    public Shed shortestQueueByAddressAndType(String address, String type) {
+        List<Shed> sheds = getByAddress(address);
         Shed tmpShed = sheds.get(0);
         int i = 0;
         for (Shed shed : sheds) {
@@ -69,7 +73,8 @@ public class ShedService {
         return tmpShed;
     }
 
-    public Shed updatePetrolArrived(String regNo) {
+    // petrol arrival date and time update
+    public Shed petrolArrived(String regNo) {
         Shed shed = mongoTemplate.findOne(Query.query(Criteria.where("_id").is(regNo)), Shed.class);
         shed.setPetrolArrivalTime(LocalDateTime.now());
         shed.setPetrolAvailable(true);
@@ -78,7 +83,8 @@ public class ShedService {
         return shed;
     }
 
-    public Shed updatePetrolFinished(String regNo) {
+    // petrol finished date and time update
+    public Shed petrolFinished(String regNo) {
         Shed shed = mongoTemplate.findOne(Query.query(Criteria.where("_id").is(regNo)), Shed.class);
         shed.setPetrolArrivalTime(null);
         shed.setPetrolAvailable(false);
@@ -87,7 +93,8 @@ public class ShedService {
         return shed;
     }
 
-    public Shed updateDieselArrived(String regNo) {
+    // diesel arrival date and time update
+    public Shed dieselArrived(String regNo) {
         Shed shed = mongoTemplate.findOne(Query.query(Criteria.where("_id").is(regNo)), Shed.class);
         shed.setDieselArrivalTime(LocalDateTime.now());
         shed.setDieselAvailable(true);
@@ -96,7 +103,8 @@ public class ShedService {
         return shed;
     }
 
-    public Shed updateDieselFinished(String regNo) {
+    // diesel finished date and time update
+    public Shed dieselFinished(String regNo) {
         Shed shed = mongoTemplate.findOne(Query.query(Criteria.where("_id").is(regNo)), Shed.class);
         shed.setDieselArrivalTime(null);
         shed.setDieselAvailable(false);
@@ -105,11 +113,13 @@ public class ShedService {
         return shed;
     }
 
-    public Shed getShedById(String regNo) {
+    // shed for by ID
+    public Shed shedById(String regNo) {
         return repository.findById(regNo).get();
     }
 
-    public Shed queueOperation(String regNo, String fuelType, String operation) {
+    // update queue length according to the regNo, Fuel type and Operation
+    public Shed queueOp(String regNo, String fuelType, String operation) {
         Shed shed = mongoTemplate.findOne(Query.query(Criteria.where("_id").is(regNo)), Shed.class);
         if (fuelType.equalsIgnoreCase("petrol")) {
             int tempLen;

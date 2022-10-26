@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 /**
- * @author S.M. Jayasekara
- * @IT_number IT19161648
+ * @author Weerasinghe S.S.
+ * @IT_number IT19204680
  */
 @RestController
 @RequestMapping("/api/v1/queue")
@@ -25,7 +25,7 @@ public class QueueController {
     @PostMapping("/insert")
     public ResponseEntity<?> insertQueue(@RequestBody Queue queue) {
         queue.setId(String.valueOf(UUID.randomUUID()));
-        return new ResponseEntity<>(service.insertQueue(queue), HttpStatus.CREATED);
+        return new ResponseEntity<>(service.enterQueue(queue), HttpStatus.CREATED);
     }
 
     @PostMapping("/exit/{id}")
@@ -35,6 +35,6 @@ public class QueueController {
 
     @GetMapping("/waiting-time/{regNo}/{type}")
     public ResponseEntity<?> getAverageWaitingTimeByRegNoAndFuelType(@PathVariable String regNo, @PathVariable String type) {
-        return new ResponseEntity<>(service.getAverageWaitingTimeByRegNoAndFuelType(regNo, type), HttpStatus.OK);
+        return new ResponseEntity<>(service.averageWaitingTimeByRegNoAndFuelType(regNo, type), HttpStatus.OK);
     }
 }

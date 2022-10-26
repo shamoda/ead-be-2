@@ -5,8 +5,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * @author S.M. Jayasekara
- * @IT_number IT19161648
+ * @author Wikramasinghe R.J.P
+ * @IT_number IT19151052
  */
 @AllArgsConstructor
 @NoArgsConstructor

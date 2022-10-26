@@ -7,8 +7,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 
 /**
- * @author S.M. Jayasekara
- * @IT_number IT19161648
+ * @author Weerasinghe S.S.
+ * @IT_number IT19204680
  */
 @AllArgsConstructor
 @NoArgsConstructor

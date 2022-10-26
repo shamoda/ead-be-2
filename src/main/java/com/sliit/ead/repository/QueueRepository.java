@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * @author S.M. Jayasekara
- * @IT_number IT19161648
+ * @author Weerasinghe S.S.
+ * @IT_number IT19204680
  */
 @Repository
 public interface QueueRepository extends MongoRepository<Queue, String> {

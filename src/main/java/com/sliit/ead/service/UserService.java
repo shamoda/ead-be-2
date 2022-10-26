@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @author S.M. Jayasekara
- * @IT_number IT19161648
+ * @author Wikramasinghe R.J.P
+ * @IT_number IT19151052
  */
 @Service
 public class UserService {
@@ -20,10 +20,12 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User insertUser(User user) {
+    // User creation
+    public User createtUser(User user) {
         return userRepository.save(user);
     }
 
+    // User login
     public User login(String nic, String password ) {
         User user = userRepository.findById(nic).get();
         if (user != null) {
@@ -35,7 +37,8 @@ public class UserService {
         return null;
     }
 
-    public List<User> getAllusers() {
+    // Get all Users method
+    public List<User> getUsers() {
         return userRepository.findAll();
     }
 }

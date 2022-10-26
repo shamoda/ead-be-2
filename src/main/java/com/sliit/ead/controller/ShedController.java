@@ -8,8 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author S.M. Jayasekara
- * @IT_number IT19161648
+ * @author Wikramasinghe R.J.P
+ * @IT_number IT19151052
  */
 @RestController
 @RequestMapping("/api/v1/shed")
@@ -24,7 +24,7 @@ public class ShedController {
 
     @PostMapping("/")
     public ResponseEntity<?> createShed(@RequestBody Shed shed) {
-        return new ResponseEntity<>(service.insertShed(shed), HttpStatus.CREATED);
+        return new ResponseEntity<>(service.createShed(shed), HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
@@ -34,36 +34,36 @@ public class ShedController {
 
     @GetMapping("/{address}")
     public ResponseEntity<?> getShedsByAddress(@PathVariable String address) {
-        return new ResponseEntity<>(service.getShedByAddress(address), HttpStatus.OK);
+        return new ResponseEntity<>(service.getByAddress(address), HttpStatus.OK);
     }
 
     @GetMapping("/{address}/{type}")
     public ResponseEntity<?> getShortestQueueByAddressAndType(@PathVariable String address, @PathVariable String type) {
-        return new ResponseEntity<>(service.getShortestQueueByAddressAndType(address, type), HttpStatus.OK);
+        return new ResponseEntity<>(service.shortestQueueByAddressAndType(address, type), HttpStatus.OK);
     }
 
     @GetMapping("/get/{regNo}")
     public ResponseEntity<?> getShedById(@PathVariable String regNo) {
-        return new ResponseEntity<>(service.getShedById(regNo), HttpStatus.OK);
+        return new ResponseEntity<>(service.shedById(regNo), HttpStatus.OK);
     }
 
     @GetMapping("/petrol-arrived/{regNo}")
     public ResponseEntity<?> updatePetrolArrived(@PathVariable String regNo) {
-        return new ResponseEntity<>(service.updatePetrolArrived(regNo), HttpStatus.OK);
+        return new ResponseEntity<>(service.petrolArrived(regNo), HttpStatus.OK);
     }
 
     @GetMapping("/petrol-finished/{regNo}")
     public ResponseEntity<?> updatePetrolFinished(@PathVariable String regNo) {
-        return new ResponseEntity<>(service.updatePetrolFinished(regNo), HttpStatus.OK);
+        return new ResponseEntity<>(service.petrolFinished(regNo), HttpStatus.OK);
     }
 
     @GetMapping("/diesel-arrived/{regNo}")
     public ResponseEntity<?> updateDieselArrived(@PathVariable String regNo) {
-        return new ResponseEntity<>(service.updateDieselArrived(regNo), HttpStatus.OK);
+        return new ResponseEntity<>(service.dieselArrived(regNo), HttpStatus.OK);
     }
 
     @GetMapping("/diesel-finished/{regNo}")
     public ResponseEntity<?> updateDieselFinished(@PathVariable String regNo) {
-        return new ResponseEntity<>(service.updateDieselFinished(regNo), HttpStatus.OK);
+        return new ResponseEntity<>(service.dieselFinished(regNo), HttpStatus.OK);
     }
 }

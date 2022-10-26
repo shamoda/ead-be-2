@@ -8,8 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author S.M. Jayasekara
- * @IT_number IT19161648
+ * @author Wikramasinghe R.J.P
+ * @IT_number IT19151052
  */
 @RestController
 @RequestMapping("/api/v1/users")
@@ -24,7 +24,7 @@ public class UserController {
 
     @PostMapping("/")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
-        return new ResponseEntity<>(service.insertUser(user), HttpStatus.CREATED);
+        return new ResponseEntity<>(service.createtUser(user), HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
@@ -34,6 +34,6 @@ public class UserController {
 
     @GetMapping("/")
     public ResponseEntity<?> getAllUsers() {
-        return new ResponseEntity<>(service.getAllusers(), HttpStatus.OK);
+        return new ResponseEntity<>(service.getUsers(), HttpStatus.OK);
     }
 }
